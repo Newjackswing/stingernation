@@ -5,886 +5,142 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>STINGERNATION</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --bg: #0d0d0f;
-    --surface: #17171c;
-    --surface2: #1f1f27;
-    --border: #2e2e3a;
-    --accent: #c8a96e;
-    --accent2: #e8c87e;
-    --text: #e8e8ec;
-    --text-muted: #888899;
-    --red: #e05555;
-    --green: #5eb87a;
-    --blue: #5b9bd5;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
-    min-height: 100vh;
-    padding: 40px 20px 80px;
-  }
-
-  /* ── Floating Side Nav ── */
-  .sidenav {
-    position: fixed;
-    right: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0;
-    background: rgba(23,23,28,0.82);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 6px 0;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.5);
-  }
-  .sidenav a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 12px;
-    text-decoration: none;
-    color: var(--text-muted);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 13px;
-    letter-spacing: 1px;
-    line-height: 1.2;
-    transition: color 0.15s, background 0.15s;
-    border-radius: 6px;
-    margin: 2px 4px;
-    min-width: 44px;
-    text-align: center;
-    position: relative;
-  }
-  .sidenav a .nav-sub {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 9px;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    color: inherit;
-    opacity: 0.7;
-    margin-top: 2px;
-  }
-  .sidenav a:hover {
-    color: var(--accent2);
-    background: rgba(200,169,110,0.08);
-  }
-  .sidenav a.active {
-    color: var(--accent);
-    background: rgba(200,169,110,0.12);
-  }
-  .sidenav .nav-divider {
-    width: 70%;
-    height: 1px;
-    background: var(--border);
-    margin: 2px auto;
-  }
-  /* Active indicator dot */
-  .sidenav a.active::before {
-    content: '';
-    position: absolute;
-    left: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    height: 16px;
-    background: var(--accent);
-    border-radius: 2px;
-  }
-
-  /* Mobile: bottom horizontal bar */
-  @media (max-width: 700px) {
-    .sidenav {
-      position: fixed;
-      right: auto;
-      left: 0;
-      bottom: 0;
-      top: auto;
-      transform: none;
-      width: 100%;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: stretch;
-      border-radius: 12px 12px 0 0;
-      border-bottom: none;
-      padding: 0;
-      gap: 0;
-    }
-    .sidenav a {
-      flex: 1;
-      padding: 10px 4px 12px;
-      margin: 0;
-      border-radius: 0;
-      font-size: 11px;
-    }
-    .sidenav a.active::before {
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-      width: 24px;
-      height: 3px;
-    }
-    .sidenav .nav-divider {
-      display: none;
-    }
-    body {
-      padding-bottom: 80px;
-    }
-  }
-
-  /* Header */
-  .header {
-    text-align: center;
-    margin-bottom: 56px;
-    position: relative;
-  }
-  .header::before {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 2px;
-    background: var(--accent);
-    margin: 0 auto 24px;
-  }
-  .header .brand {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(42px, 8vw, 80px);
-    letter-spacing: 8px;
-    color: var(--accent);
-    line-height: 1;
-    text-shadow: 0 0 60px rgba(200,169,110,0.3);
-  }
-  .header .subtitle {
-    font-size: 13px;
-    letter-spacing: 4px;
-    color: var(--text-muted);
-    margin-top: 10px;
-    text-transform: uppercase;
-  }
-
-  /* Section wrapper */
-  .section {
-    max-width: 1100px;
-    margin: 0 auto 48px;
-  }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 4px;
-    color: var(--accent);
-    margin-bottom: 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-title span.icon {
-    font-size: 18px;
-  }
-
-  /* Table */
-  .table-wrap {
-    overflow-x: auto;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-  }
-  thead tr {
-    background: var(--surface2);
-  }
-  th {
-    padding: 14px 18px;
-    text-align: left;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  tbody tr {
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    transition: background 0.15s;
-  }
-  tbody tr:hover {
-    background: #1e1e28;
-  }
-  td {
-    padding: 14px 18px;
-    vertical-align: middle;
-    line-height: 1.6;
-  }
-  td.item {
-    font-weight: 500;
-    color: var(--text);
-    white-space: nowrap;
-  }
-  td.cycle {
-    color: var(--accent2);
-    font-weight: 500;
-    white-space: nowrap;
-  }
-  td.note {
-    color: var(--text-muted);
-    font-size: 13px;
-  }
-  td.qty {
-    color: var(--blue);
-    font-weight: 500;
-    white-space: nowrap;
-  }
-  td.spec {
-    color: var(--green);
-    font-size: 13px;
-    font-weight: 400;
-  }
-  td.warn {
-    color: var(--red);
-    font-size: 12px;
-  }
-
-  /* Badge */
-  .badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
-  .badge-diesel { background: rgba(91,155,213,0.15); color: var(--blue); border: 1px solid rgba(91,155,213,0.3); }
-  .badge-petrol { background: rgba(94,184,122,0.12); color: var(--green); border: 1px solid rgba(94,184,122,0.3); }
-  .badge-turbo  { background: rgba(224,85,85,0.12);  color: var(--red);   border: 1px solid rgba(224,85,85,0.3);  }
-
-  /* Engine anchor links */
-  .eng-anchors {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 4px;
-  }
-  .eng-anchor {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 6px;
-    padding: 8px 20px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    text-decoration: none;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    letter-spacing: 2px;
-    color: var(--accent);
-    transition: background 0.15s, border-color 0.15s, color 0.15s;
-  }
-  .eng-anchor span {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 11px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-  }
-  .eng-anchor:hover {
-    background: var(--surface2);
-    border-color: var(--accent);
-    color: var(--accent2);
-  }
-
-  /* Engine section title */
-  .eng-sec-title {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-  .eng-disp {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
-    letter-spacing: 3px;
-    color: var(--accent);
-  }
-  .eng-model {
-    font-size: 13px;
-    color: var(--text-muted);
-    letter-spacing: 1px;
-  }
-
-  /* Back to top */
-  .back-top {
-    display: inline-block;
-    margin-top: 12px;
-    font-size: 12px;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    text-decoration: none;
-    opacity: 0.6;
-    transition: opacity 0.15s;
-  }
-  .back-top:hover { opacity: 1; color: var(--accent); }
-
-  /* ── Notice Section ── */
-  .notice-section {
-    max-width: 1100px;
-    margin: 0 auto 48px;
-  }
-  .notice-header {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin-bottom: 6px;
-  }
-  .notice-brand {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 4px;
-    color: var(--accent);
-  }
-  .notice-date {
-    font-size: 12px;
-    letter-spacing: 1.5px;
-    color: var(--text-muted);
-  }
-  .notice-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 10px 10px 0;
-    padding: 24px 28px;
-  }
-  .notice-block {
-    margin-bottom: 22px;
-  }
-  .notice-block:last-child { margin-bottom: 0; }
-  .notice-block-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
-  .notice-profile {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 2;
-  }
-  .notice-profile code {
-    background: var(--surface2);
-    color: var(--accent2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1px 7px;
-    font-size: 12px;
-    font-family: monospace;
-    letter-spacing: 0.5px;
-  }
-  .notice-rules {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .notice-rules li {
-    display: flex;
-    gap: 10px;
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--text);
-  }
-  .notice-rules li .rnum {
-    flex-shrink: 0;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 13px;
-    color: var(--accent);
-    letter-spacing: 1px;
-    min-width: 20px;
-    padding-top: 1px;
-  }
-  .notice-rules li.warn-rule .rnum { color: var(--red); }
-  .notice-rules li.warn-rule { color: #ddaaaa; }
-
-  /* ── Footer ── */
-  .footer {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 12px;
-    letter-spacing: 1px;
-    margin-top: 60px;
-    opacity: 0.5;
-  }
-
-  .sidenav .sns-link {
-  margin-top: 6px;
+:root {
+  --bg:#0d0d0f; --surface:#17171c; --surface2:#1f1f27;
+  --border:#2e2e3a; --accent:#c8a96e; --accent2:#e8c87e;
+  --text:#e8e8ec; --text-muted:#888899;
+  --red:#e05555; --green:#5eb87a; --blue:#5b9bd5;
 }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;padding:40px 20px 80px;}
 
-.sidenav .sns-link svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
+.sidenav{
+  position:fixed;right:18px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;align-items:flex-end;
+  background:rgba(23,23,28,.82);border:1px solid var(--border);
+  border-radius:10px;padding:6px 0;z-index:100;
 }
+.sidenav a{
+  display:flex;flex-direction:column;align-items:center;
+  padding:10px 12px;color:var(--text-muted);
+  text-decoration:none;font-family:'Bebas Neue';font-size:13px;
+}
+.sidenav a:hover{color:var(--accent2);}
+.sidenav .nav-divider{height:1px;width:70%;background:var(--border);margin:4px auto;}
 
-.sidenav .sns-link:hover {
-  color: var(--accent2);
-  background: rgba(200,169,110,0.08);
-}
+.sidenav .sns-link{border-top:1px solid var(--border);margin-top:8px;padding-top:12px;position:relative;}
+.sidenav .sns-link svg{width:18px;height:18px;fill:currentColor;}
+.sidenav .sns-link:hover svg{filter:drop-shadow(0 0 6px rgba(200,169,110,.6));transform:scale(1.1);}
 
-  .sidenav .sns-link {
-  border-top: 1px solid var(--border);
-  margin-top: 8px;
-  padding-top: 12px;
+.tooltip{
+  position:absolute;right:120%;top:50%;transform:translateY(-50%);
+  background:var(--surface2);padding:4px 8px;border-radius:4px;
+  opacity:0;transition:.15s;font-size:11px;
 }
-.sidenav .sns-link {
-  margin-top: 8px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  position: relative;
-}
+.sns-link:hover .tooltip{opacity:1;}
 
-.sidenav .sns-link svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-  transition: filter 0.2s, transform 0.2s;
-}
+.section{max-width:1100px;margin:0 auto 48px;}
+.section-title{font-family:'Bebas Neue';font-size:22px;color:var(--accent);margin-bottom:16px;border-bottom:1px solid var(--border);}
 
-/* Glow 효과 */
-.sidenav .sns-link:hover {
-  color: var(--accent2);
-  background: rgba(200,169,110,0.08);
-}
+.table-wrap{border:1px solid var(--border);border-radius:10px;overflow:auto;}
+table{width:100%;border-collapse:collapse;}
+td,th{padding:14px;}
+tbody tr{background:var(--surface);border-top:1px solid var(--border);}
+tbody tr:hover{background:#1e1e28;}
 
-.sidenav .sns-link:hover svg {
-  filter: drop-shadow(0 0 6px rgba(200,169,110,0.6));
-  transform: scale(1.1);
-}
-
-/* Tooltip */
-.sidenav .sns-link .tooltip {
-  position: absolute;
-  right: 120%;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--surface2);
-  color: var(--text);
-  padding: 4px 8px;
-  font-size: 11px;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  opacity: 0;
-  pointer-events: none;
-  white-space: nowrap;
-  transition: opacity 0.15s, transform 0.15s;
-}
-
-.sidenav .sns-link:hover .tooltip {
-  opacity: 1;
-  transform: translateY(-50%) translateX(-4px);
-}
-
-/* 모바일에서는 툴팁 숨김 */
-@media (max-width: 700px) {
-  .sidenav .sns-link .tooltip {
-    display: none;
-  }
-}
-  @media (max-width: 600px) {
-    th, td { padding: 10px 12px; }
-    .tab-btn { padding: 10px 14px; font-size: 15px; }
-  }
+.footer{text-align:center;margin-top:60px;color:var(--text-muted);font-size:12px;}
 </style>
 </head>
+
 <body>
 
-<!-- Floating Side Nav -->
 <nav class="sidenav" id="sidenav">
-  <a href="#top" data-target="top">
-    TOP
-    <span class="nav-sub">처음</span>
-  </a>
+  <a href="#top" data-target="top">TOP</a>
   <div class="nav-divider"></div>
-  <a href="#sec-notice" data-target="sec-notice">
-    📢
-    <span class="nav-sub">공지</span>
-  </a>
-  <a href="#sec-cycle" data-target="sec-cycle">
-    🔧
-    <span class="nav-sub">교체주기</span>
-  </a>
-  <a href="#sec-fluid" data-target="sec-fluid">
-    🧪
-    <span class="nav-sub">유체용량</span>
-  </a>
-  <div class="nav-divider"></div>
-  <a href="#t20" data-target="t20">
-    2.0T
-    <span class="nav-sub">터보</span>
-  </a>
-  <a href="#t25" data-target="t25">
-    2.5T
-    <span class="nav-sub">터보</span>
-  </a>
-  <a href="#t33" data-target="t33">
-    3.3T
-    <span class="nav-sub">터보</span>
-  </a>
-  <a href="#t22" data-target="t22">
-    2.2D
-    <span class="nav-sub">디젤</span>
-  </a>
+
+  <a href="#sec-notice" data-target="sec-notice">📢</a>
 
   <div class="nav-divider"></div>
 
-<a href="instagram://user?username=stinger__nation"
-   data-fallback="https://www.instagram.com/stinger__nation"
-   class="sns-link"
-   aria-label="Instagram"
-   title="Instagram">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm0 2h10c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3zm5 3.5A5.5 5.5 0 1 0 17.5 13 5.5 5.5 0 0 0 12 7.5zm0 2A3.5 3.5 0 1 1 8.5 13 3.5 3.5 0 0 1 12 9.5zm4.8-3.3a1.2 1.2 0 1 0 1.2 1.2 1.2 1.2 0 0 0-1.2-1.2z"/>
-  </svg>
-  <span class="nav-sub">INST</span>
-  <span class="tooltip">Instagram</span>
-</a>
+  <a href="#t20" data-target="t20">2.0T</a>
+  <a href="#t25" data-target="t25">2.5T</a>
+  <a href="#t33" data-target="t33">3.3T</a>
+  <a href="#t22" data-target="t22">2.2D</a>
 
+  <a href="#sec-cycle" data-target="sec-cycle">🔧</a>
+  <a href="#sec-fluid" data-target="sec-fluid">🧪</a>
 
+  <div class="nav-divider"></div>
+
+  <a href="instagram://user?username=stinger__nation"
+     data-fallback="https://www.instagram.com/stinger__nation"
+     class="sns-link">
+    <svg viewBox="0 0 24 24">
+      <path d="M7 2C4 2 2 4 2 7v10c0 3 2 5 5 5h10c3 0 5-2 5-5V7c0-3-2-5-5-5H7z"/>
+    </svg>
+    <span class="tooltip">Instagram</span>
+  </a>
 </nav>
 
-<div class="header" id="top">
-  <div class="brand">STINGERNATION</div>
-  <div class="subtitle">STINGERNATION 공지 & 가이드 &nbsp;·&nbsp; STINGERNATION Notice & Guide</div>
+<div id="top" class="section">
+  <div class="section-title">STINGERNATION</div>
 </div>
 
-<!-- 공지사항 -->
-<div class="notice-section" id="sec-notice">
-  <div class="section-title"><span class="icon">📢</span> 공지사항</div>
-  <div class="notice-box">
-
-    <!-- 브랜드 + 날짜 -->
-    <div class="notice-header" style="margin-bottom:18px;">
-      <div class="notice-brand">STINGERNATION</div>
-      <div class="notice-date">26.04.01. 기준</div>
-    </div>
-
-    <!-- 프로필 기준 -->
-    <div class="notice-block">
-      <div class="notice-block-title">프로필 기준</div>
-      <div class="notice-profile">
-        <code>성+이름 / 지역 / 출생년도 2자리 / 차종 / 차번호뒤</code><br>
-        <code>이름 / 지역 / 출생년도 2자리 / 차종 / 차번호뒤</code>
-      </div>
-    </div>
-
-    <!-- 시행 규칙 -->
-    <div class="notice-block">
-      <div class="notice-block-title">시행 규칙</div>
-      <ol class="notice-rules">
-        <li><span class="rnum">01</span><span>이름 또는 성+이름</span></li>
-        <li><span class="rnum">02</span><span>지역은 도단위 광역시, 시·군단위 표기 가능합니다.</span></li>
-        <li><span class="rnum">03</span><span>나이는 출생년도 두자리를 기준으로 합니다.</span></li>
-        <li><span class="rnum">04</span><span>차종은 스팅어, 모델3, 스포티지, K5, 아반떼 등 (영어 사용 가능)</span></li>
-        <li><span class="rnum">05</span><span>차량번호 끝자리 4자리는 선택사항입니다. 서로 수배 및 나의 차량을 알리고 싶다면 표시하시면 됩니다.</span></li>
-        <li><span class="rnum">06</span><span>벙은 누구나 주최 가능합니다.</span></li>
-        <li class="warn-rule"><span class="rnum">07</span><span>단, 벙에서 일어나는 일은 개인 책임입니다. 무리한 주행·배기·고성방가 등 선을 넘는 행위는 하지 말아주세요.</span></li>
-        <li><span class="rnum">08</span><span>벙은 장소·날짜·시간을 명확하게 준비하셔서 모집해주세요.</span></li>
-        <li class="warn-rule"><span class="rnum">09</span><span>벙 참석은 절대 강요하지 않습니다. 무리한 강요 시 경고입니다.</span></li>
-        <li class="warn-rule"><span class="rnum">10</span><span>특정 차종·엔진 형식별(전기차·내연기관 등) 선을 넘는 비하는 내보내기 됩니다.</span></li>
-        <li class="warn-rule"><span class="rnum">11</span><span>정보 공유는 OK, 내가 무조건 맞다 ✕ (이 또한 선을 넘으면 경고 조치 후 내보내기됩니다.)</span></li>
-        <li><span class="rnum">12</span><span>나이·성별·연령대가 다양하니 도가 지나치는 발언·장난은 삼가해주시길 바랍니다.</span></li>
-        <li><span class="rnum">13</span><span>불만·건의·사건사고 등 모든 상황 발생 시 운영진을 찾아주세요.</span></li>
-        <li><span class="rnum">14</span><span>모든 대화 내용은 운영진에 의해 모니터링됩니다.</span></li>
-      </ol>
-    </div>
-
-  </div>
+<div id="sec-notice" class="section">
+  <div class="section-title">공지사항</div>
 </div>
 
-<!-- 소모품 교체 주기 -->
-<div class="section" id="sec-cycle">
-  <div class="section-title"><span class="icon">🔧</span> 소모품 교체 주기</div>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>품목</th>
-          <th>교체 주기</th>
-          <th>비고</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="item">미션 오일</td>
-          <td class="cycle">6 ~ 8만 km</td>
-          <td class="note">—</td>
-        </tr>
-        <tr>
-          <td class="item">앞 디퍼렌셜</td>
-          <td class="cycle">2만 km</td>
-          <td class="note">—</td>
-        </tr>
-        <tr>
-          <td class="item">트랜스퍼 케이스</td>
-          <td class="cycle">2만 km</td>
-          <td class="note">—</td>
-        </tr>
-        <tr>
-          <td class="item">리어 디퍼렌셜</td>
-          <td class="cycle">2만 km</td>
-          <td class="note">—</td>
-        </tr>
-        <tr>
-          <td class="item">브레이크액</td>
-          <td class="cycle">2년 / 4만 km</td>
-          <td class="note">먼저 도래하는 시점 기준</td>
-        </tr>
-        <tr>
-          <td class="item">냉각수 (장기수명)</td>
-          <td class="cycle">최초 20만 km · 이후 4만 km</td>
-          <td class="note">LLC 타입</td>
-        </tr>
-        <tr>
-          <td class="item">에어클리너 필터</td>
-          <td class="cycle">1만 km</td>
-          <td class="note">—</td>
-        </tr>
-        <tr>
-          <td class="item">연료 필터</td>
-          <td class="cycle">
-            <span class="badge badge-diesel">디젤 3만 km</span>&nbsp;
-            <span class="badge badge-petrol">휘발유 무교환</span>
-          </td>
-          <td class="note">휘발유는 연료펌프 일체형</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div id="t20" class="section"><div class="section-title">2.0 TURBO</div></div>
+<div id="t25" class="section"><div class="section-title">2.5 TURBO</div></div>
+<div id="t33" class="section"><div class="section-title">3.3 TURBO</div></div>
+
+<div id="t22" class="section">
+  <div class="section-title">2.2 DIESEL</div>
 </div>
 
-<!-- 용량 -->
-<div class="section" id="sec-fluid">
-  <div class="section-title"><span class="icon">🧪</span> 유체 용량 및 규격</div>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>품목</th>
-          <th>용량</th>
-          <th>규격 / 타입</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="item">냉각수</td>
-          <td class="qty">10 L</td>
-          <td class="spec">—</td>
-        </tr>
-        <tr>
-          <td class="item">미션 오일 (8단 ATF)</td>
-          <td class="qty">8 L</td>
-          <td class="spec">SP-IV</td>
-        </tr>
-        <tr>
-          <td class="item">앞 디퍼렌셜</td>
-          <td class="qty">1 L</td>
-          <td class="spec">—</td>
-        </tr>
-        <tr>
-          <td class="item">리어 디퍼렌셜 (LSD)</td>
-          <td class="qty">2 L</td>
-          <td class="spec">후륜 LSD</td>
-        </tr>
-        <tr>
-          <td class="item">트랜스퍼 케이스</td>
-          <td class="qty">1 L</td>
-          <td class="spec">—</td>
-        </tr>
-        <tr>
-          <td class="item">브레이크액</td>
-          <td class="qty">2 L</td>
-          <td class="spec">DOT 4</td>
-        </tr>
-        <tr>
-          <td class="item">와셔액</td>
-          <td class="qty">4.5 L</td>
-          <td class="spec">—</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<!-- 이동 완료 -->
+<div id="sec-cycle" class="section">
+  <div class="section-title">소모품 교체 주기</div>
 </div>
 
-<!-- 엔진오일 섹션 -->
-<div class="section" style="max-width:1100px;margin:0 auto 16px;">
-  <div class="section-title"><span class="icon">🛢️</span> 엔진 오일 사양</div>
-
-  <!-- 앵커 링크 -->
-  <div class="eng-anchors">
-    <a href="#t20" class="eng-anchor">2.0 T <span>터보</span></a>
-    <a href="#t25" class="eng-anchor">2.5 T <span>터보</span></a>
-    <a href="#t33" class="eng-anchor">3.3 T <span>터보</span></a>
-    <a href="#t22" class="eng-anchor">2.2 D <span>디젤</span></a>
-  </div>
+<div id="sec-fluid" class="section">
+  <div class="section-title">유체 용량</div>
 </div>
 
-<!-- 2.0 터보 -->
-<div class="section" id="t20">
-  <div class="eng-sec-title">
-    <span class="eng-disp">2.0 TURBO</span>
-    <span class="eng-model">스팅어 2.0 터보</span>
-  </div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>항목</th><th>내용</th></tr></thead>
-      <tbody>
-        <tr><td class="item">API 등급</td><td>SN 이상</td></tr>
-        <tr><td class="item">ILSAC 등급</td><td>GF-5 이상</td></tr>
-        <tr><td class="item">점도 (기본 권장)</td><td class="cycle">SAE 5W-30</td></tr>
-        <tr><td class="item">용량 (필터 포함)</td><td class="qty">5.3 L</td></tr>
-        <tr><td class="item">비고</td><td class="note">💡 터보 엔진 특성상 고온 안정성이 좋은 합성유 권장</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <a href="#top" class="back-top">↑ 맨 위로</a>
-</div>
-
-<!-- 2.5 터보 -->
-<div class="section" id="t25">
-  <div class="eng-sec-title">
-    <span class="eng-disp">2.5 TURBO</span>
-    <span class="eng-model">스팅어 2.5 터보</span>
-  </div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>항목</th><th>내용</th></tr></thead>
-      <tbody>
-        <tr><td class="item">API 등급</td><td>SP 이상</td></tr>
-        <tr><td class="item">ILSAC 등급</td><td>GF-6 이상</td></tr>
-        <tr><td class="item">점도 (기본 권장)</td><td class="cycle">SAE 0W-30</td></tr>
-        <tr><td class="item">용량 (필터 포함)</td><td class="qty">6.0 L</td></tr>
-        <tr><td class="item">비고</td><td class="note">💡 연비·내구성 균형형 세팅 — 0W-30 점도 유지 권장</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <a href="#top" class="back-top">↑ 맨 위로</a>
-</div>
-
-<!-- 3.3 터보 -->
-<div class="section" id="t33">
-  <div class="eng-sec-title">
-    <span class="eng-disp">3.3 TURBO</span>
-    <span class="eng-model">스팅어 3.3 터보</span>
-  </div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>항목</th><th>내용</th></tr></thead>
-      <tbody>
-        <tr><td class="item">API 등급</td><td>SN 이상</td></tr>
-        <tr><td class="item">ILSAC 등급</td><td>GF-5 이상</td></tr>
-        <tr><td class="item">점도 (기본 권장)</td><td class="cycle">SAE 5W-30</td></tr>
-        <tr><td class="item">점도 (고성능 주행)</td><td>0W-40 / 5W-40 가능</td></tr>
-        <tr><td class="item">용량 (필터 포함)</td><td class="qty">6.8 L</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <a href="#top" class="back-top">↑ 맨 위로</a>
-</div>
-
-<!-- 2.2 디젤 -->
-<div class="section" id="t22">
-  <div class="eng-sec-title">
-    <span class="eng-disp">2.2 DIESEL</span>
-    <span class="eng-model">스팅어 2.2 디젤</span>
-  </div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>항목</th><th>내용</th></tr></thead>
-      <tbody>
-        <tr><td class="item">오일 규격</td><td>ACEA C3</td></tr>
-        <tr><td class="item">API 등급</td><td>SN / CF 이상</td></tr>
-        <tr><td class="item">점도 (기본 권장)</td><td class="cycle">SAE 5W-30</td></tr>
-        <tr><td class="item">용량 (필터 포함)</td><td class="qty">6.4 L</td></tr>
-        <tr><td class="item">비고</td><td class="warn">⚠ DPF 장착 차량 — 반드시 저회분(Low-SAPS) 규격 사용</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <a href="#top" class="back-top">↑ 맨 위로</a>
-</div>
-
-<div class="footer">STINGER MAINTENANCE GUIDE &nbsp;·&nbsp; 본 자료는 참고용이며 공식 정비 지침을 우선합니다</div>
-<div style="height:60vh;"></div>
+<div class="footer">STINGER GUIDE</div>
 
 <script>
 (function () {
-  var sections = ['top', 'sec-notice', 'sec-cycle', 'sec-fluid', 't20', 't25', 't33', 't22'];
+  var sections = ['top','sec-notice','t20','t25','t33','t22','sec-cycle','sec-fluid'];
   var navLinks = document.querySelectorAll('#sidenav a[data-target]');
 
-  function setActive(id) {
-    navLinks.forEach(function (a) {
-      var isActive = a.getAttribute('data-target') === id;
-      if (isActive) {
-        a.classList.add('active');
-      } else {
-        a.classList.remove('active');
-      }
+  function setActive(id){
+    navLinks.forEach(a=>{
+      a.classList.toggle('active',a.getAttribute('data-target')===id);
     });
   }
 
-  function onScroll() {
-    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    var docHeight = document.documentElement.scrollHeight;
-    var winHeight = window.innerHeight;
-    var atBottom = scrollY + winHeight >= docHeight - 10;
-
-    // 맨 아래에 도달하면 마지막 섹션 강제 활성화
-    if (atBottom) {
-      setActive(sections[sections.length - 1]);
-      return;
-    }
-
+  function onScroll(){
     var current = sections[0];
-    for (var i = 0; i < sections.length; i++) {
-      var el = document.getElementById(sections[i]);
-      if (el && el.getBoundingClientRect().top <= 120) {
-        current = sections[i];
+    sections.forEach(id=>{
+      var el=document.getElementById(id);
+      if(el && el.getBoundingClientRect().top<=120){
+        current=id;
       }
-    }
+    });
     setActive(current);
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll',onScroll);
   onScroll();
 })();
 
-  document.querySelector('.sns-link').addEventListener('click', function(e) {
-  var fallback = this.getAttribute('data-fallback');
-
-  // 앱 실행 시도
-  setTimeout(function() {
-    window.location.href = fallback;
-  }, 800);
+document.querySelector('.sns-link').addEventListener('click',function(){
+  var fallback=this.getAttribute('data-fallback');
+  setTimeout(()=>{window.location.href=fallback;},800);
 });
-</script>
 </script>
 
 </body>

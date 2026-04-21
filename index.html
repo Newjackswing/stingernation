@@ -342,7 +342,90 @@
   }
   .back-top:hover { opacity: 1; color: var(--accent); }
 
-  /* Footer */
+  /* ── Notice Section ── */
+  .notice-section {
+    max-width: 1100px;
+    margin: 0 auto 48px;
+  }
+  .notice-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  .notice-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: var(--accent);
+  }
+  .notice-date {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+  }
+  .notice-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 24px 28px;
+  }
+  .notice-block {
+    margin-bottom: 22px;
+  }
+  .notice-block:last-child { margin-bottom: 0; }
+  .notice-block-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .notice-profile {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 2;
+  }
+  .notice-profile code {
+    background: var(--surface2);
+    color: var(--accent2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 12px;
+    font-family: monospace;
+    letter-spacing: 0.5px;
+  }
+  .notice-rules {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .notice-rules li {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .notice-rules li .rnum {
+    flex-shrink: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 1px;
+    min-width: 20px;
+    padding-top: 1px;
+  }
+  .notice-rules li.warn-rule .rnum { color: var(--red); }
+  .notice-rules li.warn-rule { color: #ddaaaa; }
+
+  /* ── Footer ── */
   .footer {
     text-align: center;
     color: var(--text-muted);
@@ -367,6 +450,14 @@
     <span class="nav-sub">처음</span>
   </a>
   <div class="nav-divider"></div>
+  <a href="#sec-notice" data-target="sec-notice">
+    📢
+    <span class="nav-sub">공지</span>
+  </a>
+  <a href="#sec-realname" data-target="sec-realname">
+    🪪
+    <span class="nav-sub">실명제</span>
+  </a>
   <a href="#sec-cycle" data-target="sec-cycle">
     🔧
     <span class="nav-sub">교체주기</span>
@@ -397,6 +488,106 @@
 <div class="header" id="top">
   <div class="brand">STINGER</div>
   <div class="subtitle">소모품 교체 매뉴얼 &nbsp;·&nbsp; Consumable Replacement Guide</div>
+</div>
+
+<!-- 공지사항 -->
+<div class="notice-section" id="sec-notice">
+  <div class="section-title"><span class="icon">📢</span> 공지사항</div>
+  <div class="notice-box">
+
+    <!-- 브랜드 + 날짜 -->
+    <div class="notice-header" style="margin-bottom:18px;">
+      <div class="notice-brand">STINGERNATION</div>
+      <div class="notice-date">26.04.01. 기준</div>
+    </div>
+
+    <!-- 프로필 기준 -->
+    <div class="notice-block">
+      <div class="notice-block-title">프로필 기준</div>
+      <div class="notice-profile">
+        <code>성+이름 / 지역 / 출생년도 2자리 / 차종 / 차번호뒤</code><br>
+        <code>이름 / 지역 / 출생년도 2자리 / 차종 / 차번호뒤</code>
+      </div>
+    </div>
+
+    <!-- 시행 규칙 -->
+    <div class="notice-block">
+      <div class="notice-block-title">시행 규칙</div>
+      <ol class="notice-rules">
+        <li><span class="rnum">01</span><span>이름 또는 성+이름</span></li>
+        <li><span class="rnum">02</span><span>지역은 도단위 광역시, 시·군단위 표기 가능합니다.</span></li>
+        <li><span class="rnum">03</span><span>나이는 출생년도 두자리를 기준으로 합니다.</span></li>
+        <li><span class="rnum">04</span><span>차종은 스팅어, 모델3, 스포티지, K5, 아반떼 등 (영어 사용 가능)</span></li>
+        <li><span class="rnum">05</span><span>차량번호 끝자리 4자리는 선택사항입니다. 서로 수배 및 나의 차량을 알리고 싶다면 표시하시면 됩니다.</span></li>
+        <li><span class="rnum">06</span><span>벙은 누구나 주최 가능합니다.</span></li>
+        <li class="warn-rule"><span class="rnum">07</span><span>단, 벙에서 일어나는 일은 개인 책임입니다. 무리한 주행·배기·고성방가 등 선을 넘는 행위는 하지 말아주세요.</span></li>
+        <li><span class="rnum">08</span><span>벙은 장소·날짜·시간을 명확하게 준비하셔서 모집해주세요.</span></li>
+        <li class="warn-rule"><span class="rnum">09</span><span>벙 참석은 절대 강요하지 않습니다. 무리한 강요 시 경고입니다.</span></li>
+        <li class="warn-rule"><span class="rnum">10</span><span>특정 차종·엔진 형식별(전기차·내연기관 등) 선을 넘는 비하는 내보내기 됩니다.</span></li>
+        <li class="warn-rule"><span class="rnum">11</span><span>정보 공유는 OK, 내가 무조건 맞다 ✕ (이 또한 선을 넘으면 경고 조치 후 내보내기됩니다.)</span></li>
+        <li><span class="rnum">12</span><span>나이·성별·연령대가 다양하니 도가 지나치는 발언·장난은 삼가해주시길 바랍니다.</span></li>
+        <li><span class="rnum">13</span><span>불만·건의·사건사고 등 모든 상황 발생 시 운영진을 찾아주세요.</span></li>
+        <li><span class="rnum">14</span><span>모든 대화 내용은 운영진에 의해 모니터링됩니다.</span></li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+
+<!-- 실명제 공지 -->
+<div class="notice-section" id="sec-realname">
+  <div class="section-title"><span class="icon">🪪</span> 실명제 시행 공지</div>
+  <div class="notice-box" style="border-left-color: var(--red);">
+
+    <!-- 헤더 -->
+    <div class="notice-header" style="margin-bottom:18px;">
+      <div class="notice-brand">실명제 시행</div>
+      <div class="notice-date">26.04.01 오전 06시 이후</div>
+    </div>
+
+    <!-- 시행 안내 -->
+    <div class="notice-block">
+      <div class="notice-block-title" style="color:var(--red);">시행 안내</div>
+      <div class="notice-profile">
+        모든 닉네임 실명제를 실시합니다 <span style="color:var(--text-muted);font-size:12px;">(투표결과 반영)</span>
+      </div>
+    </div>
+
+    <!-- 닉네임 기준 -->
+    <div class="notice-block">
+      <div class="notice-block-title">닉네임 기준</div>
+      <div class="notice-profile">
+        <code>성+이름 / 지역 / 출생년도 2자리 / 차종 / 차번호뒤</code><br>
+        <code>이름 / 지역 / 출생년도 2자리 / 차종 / 차번호뒤</code>
+      </div>
+    </div>
+
+    <!-- 시행 규칙 -->
+    <div class="notice-block">
+      <div class="notice-block-title">시행 규칙</div>
+      <ol class="notice-rules">
+        <li><span class="rnum">01</span><span>이름 또는 성+이름</span></li>
+        <li><span class="rnum">02</span><span>지역은 도단위 광역시, 시·군단위 표기 가능합니다.</span></li>
+        <li><span class="rnum">03</span><span>나이는 출생년도 두자리를 기준으로 합니다.</span></li>
+        <li><span class="rnum">04</span><span>차종은 스팅어, 모델3, 스포티지, K5, 아반떼 등 — 브랜드명을 제외한 공식 차종 이름 기준. (영어 사용 가능)</span></li>
+        <li><span class="rnum">05</span><span>차량번호 끝자리 4자리는 선택사항입니다. 서로 수배 및 나의 차량을 알리고 싶다면 표시하시면 됩니다.</span></li>
+      </ol>
+    </div>
+
+    <!-- 준수사항 -->
+    <div class="notice-block">
+      <div class="notice-block-title" style="color:var(--red);">⚠ 준수사항</div>
+      <ol class="notice-rules">
+        <li class="warn-rule"><span class="rnum">·</span><span>26.04.01 06시 이후, 기준에 맞지 않는 닉네임 유지 시 <strong style="color:var(--red);">3회 경고 후 4회째 내보내기 재입장 불가</strong>됩니다. (장난식 변경도 동일 적용)</span></li>
+        <li class="warn-rule"><span class="rnum">·</span><span>실제 본인 이름이 아닌 가명 또는 타인 이름 사용 시 <strong style="color:var(--red);">1회 경고 → 2회 내보내기 재입장 불가</strong>됩니다.<br><span style="font-size:12px;opacity:0.75;">(적발 시, 혹시 사용하시더라도 끝까지 적발 안 되시면 됩니다.)</span></span></li>
+      </ol>
+    </div>
+
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:13px;color:var(--text-muted);text-align:center;letter-spacing:1px;">
+      실명제 시행에 많은 협조 부탁드립니다.
+    </div>
+
+  </div>
 </div>
 
 <!-- 소모품 교체 주기 -->
@@ -615,7 +806,7 @@
 
 <script>
 (function () {
-  var sections = ['top', 'sec-cycle', 'sec-fluid', 't22', 't20', 't25', 't33'];
+  var sections = ['top', 'sec-notice', 'sec-realname', 'sec-cycle', 'sec-fluid', 't22', 't20', 't25', 't33'];
   var navLinks = document.querySelectorAll('#sidenav a[data-target]');
 
   function setActive(id) {

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스팅어 소모품 교체 매뉴얼</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #17171c;
+    --surface2: #1f1f27;
+    --border: #2e2e3a;
+    --accent: #c8a96e;
+    --accent2: #e8c87e;
+    --text: #e8e8ec;
+    --text-muted: #888899;
+    --red: #e05555;
+    --green: #5eb87a;
+    --blue: #5b9bd5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+  }
+
+  /* ── Floating Side Nav ── */
+  .sidenav {
+    position: fixed;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+    background: rgba(23,23,28,0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 6px 0;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.5);
+  }
+  .sidenav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    transition: color 0.15s, background 0.15s;
+    border-radius: 6px;
+    margin: 2px 4px;
+    min-width: 44px;
+    text-align: center;
+    position: relative;
+  }
+  .sidenav a .nav-sub {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: inherit;
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+  .sidenav a:hover {
+    color: var(--accent2);
+    background: rgba(200,169,110,0.08);
+  }
+  .sidenav a.active {
+    color: var(--accent);
+    background: rgba(200,169,110,0.12);
+  }
+  .sidenav .nav-divider {
+    width: 70%;
+    height: 1px;
+    background: var(--border);
+    margin: 2px auto;
+  }
+  /* Active indicator dot */
+  .sidenav a.active::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  /* Mobile: bottom horizontal bar */
+  @media (max-width: 700px) {
+    .sidenav {
+      position: fixed;
+      right: auto;
+      left: 0;
+      bottom: 0;
+      top: auto;
+      transform: none;
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: stretch;
+      border-radius: 12px 12px 0 0;
+      border-bottom: none;
+      padding: 0;
+      gap: 0;
+    }
+    .sidenav a {
+      flex: 1;
+      padding: 10px 4px 12px;
+      margin: 0;
+      border-radius: 0;
+      font-size: 11px;
+    }
+    .sidenav a.active::before {
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 3px;
+    }
+    .sidenav .nav-divider {
+      display: none;
+    }
+    body {
+      padding-bottom: 80px;
+    }
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+    position: relative;
+  }
+  .header::before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+  }
+  .header .brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 8vw, 80px);
+    letter-spacing: 8px;
+    color: var(--accent);
+    line-height: 1;
+    text-shadow: 0 0 60px rgba(200,169,110,0.3);
+  }
+  .header .subtitle {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+
+  /* Section wrapper */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto 48px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title span.icon {
+    font-size: 18px;
+  }
+
+  /* Table */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead tr {
+    background: var(--surface2);
+  }
+  th {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  tbody tr {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  tbody tr:hover {
+    background: #1e1e28;
+  }
+  td {
+    padding: 14px 18px;
+    vertical-align: middle;
+    line-height: 1.6;
+  }
+  td.item {
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  td.cycle {
+    color: var(--accent2);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  td.note {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  td.qty {
+    color: var(--blue);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  td.spec {
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 400;
+  }
+  td.warn {
+    color: var(--red);
+    font-size: 12px;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .badge-diesel { background: rgba(91,155,213,0.15); color: var(--blue); border: 1px solid rgba(91,155,213,0.3); }
+  .badge-petrol { background: rgba(94,184,122,0.12); color: var(--green); border: 1px solid rgba(94,184,122,0.3); }
+  .badge-turbo  { background: rgba(224,85,85,0.12);  color: var(--red);   border: 1px solid rgba(224,85,85,0.3);  }
+
+  /* Engine anchor links */
+  .eng-anchors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .eng-anchor {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 8px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .eng-anchor span {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+  }
+  .eng-anchor:hover {
+    background: var(--surface2);
+    border-color: var(--accent);
+    color: var(--accent2);
+  }
+
+  /* Engine section title */
+  .eng-sec-title {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .eng-disp {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+  .eng-model {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+
+  /* Back to top */
+  .back-top {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.15s;
+  }
+  .back-top:hover { opacity: 1; color: var(--accent); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-top: 60px;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 600px) {
+    th, td { padding: 10px 12px; }
+    .tab-btn { padding: 10px 14px; font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating Side Nav -->
+<nav class="sidenav" id="sidenav">
+  <a href="#top" data-target="top">
+    TOP
+    <span class="nav-sub">처음</span>
+  </a>
+  <div class="nav-divider"></div>
+  <a href="#sec-cycle" data-target="sec-cycle">
+    🔧
+    <span class="nav-sub">교체주기</span>
+  </a>
+  <a href="#sec-fluid" data-target="sec-fluid">
+    🧪
+    <span class="nav-sub">유체용량</span>
+  </a>
+  <div class="nav-divider"></div>
+  <a href="#t22" data-target="t22">
+    2.2D
+    <span class="nav-sub">디젤</span>
+  </a>
+  <a href="#t20" data-target="t20">
+    2.0T
+    <span class="nav-sub">터보</span>
+  </a>
+  <a href="#t25" data-target="t25">
+    2.5T
+    <span class="nav-sub">터보</span>
+  </a>
+  <a href="#t33" data-target="t33">
+    3.3T
+    <span class="nav-sub">터보</span>
+  </a>
+</nav>
+
+<div class="header" id="top">
+  <div class="brand">STINGER</div>
+  <div class="subtitle">소모품 교체 매뉴얼 &nbsp;·&nbsp; Consumable Replacement Guide</div>
+</div>
+
+<!-- 소모품 교체 주기 -->
+<div class="section" id="sec-cycle">
+  <div class="section-title"><span class="icon">🔧</span> 소모품 교체 주기</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>품목</th>
+          <th>교체 주기</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item">미션 오일</td>
+          <td class="cycle">6 ~ 8만 km</td>
+          <td class="note">—</td>
+        </tr>
+        <tr>
+          <td class="item">앞 디퍼렌셜</td>
+          <td class="cycle">2만 km</td>
+          <td class="note">—</td>
+        </tr>
+        <tr>
+          <td class="item">트랜스퍼 케이스</td>
+          <td class="cycle">2만 km</td>
+          <td class="note">—</td>
+        </tr>
+        <tr>
+          <td class="item">리어 디퍼렌셜</td>
+          <td class="cycle">2만 km</td>
+          <td class="note">—</td>
+        </tr>
+        <tr>
+          <td class="item">브레이크액</td>
+          <td class="cycle">2년 / 4만 km</td>
+          <td class="note">먼저 도래하는 시점 기준</td>
+        </tr>
+        <tr>
+          <td class="item">냉각수 (장기수명)</td>
+          <td class="cycle">최초 20만 km · 이후 4만 km</td>
+          <td class="note">LLC 타입</td>
+        </tr>
+        <tr>
+          <td class="item">에어클리너 필터</td>
+          <td class="cycle">1만 km</td>
+          <td class="note">—</td>
+        </tr>
+        <tr>
+          <td class="item">연료 필터</td>
+          <td class="cycle">
+            <span class="badge badge-diesel">디젤 3만 km</span>&nbsp;
+            <span class="badge badge-petrol">휘발유 무교환</span>
+          </td>
+          <td class="note">휘발유는 연료펌프 일체형</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 용량 -->
+<div class="section" id="sec-fluid">
+  <div class="section-title"><span class="icon">🧪</span> 유체 용량 및 규격</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>품목</th>
+          <th>용량</th>
+          <th>규격 / 타입</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item">냉각수</td>
+          <td class="qty">10 L</td>
+          <td class="spec">—</td>
+        </tr>
+        <tr>
+          <td class="item">미션 오일 (8단 ATF)</td>
+          <td class="qty">8 L</td>
+          <td class="spec">SP-IV</td>
+        </tr>
+        <tr>
+          <td class="item">앞 디퍼렌셜</td>
+          <td class="qty">1 L</td>
+          <td class="spec">—</td>
+        </tr>
+        <tr>
+          <td class="item">리어 디퍼렌셜 (LSD)</td>
+          <td class="qty">2 L</td>
+          <td class="spec">후륜 LSD</td>
+        </tr>
+        <tr>
+          <td class="item">트랜스퍼 케이스</td>
+          <td class="qty">1 L</td>
+          <td class="spec">—</td>
+        </tr>
+        <tr>
+          <td class="item">브레이크액</td>
+          <td class="qty">2 L</td>
+          <td class="spec">DOT 4</td>
+        </tr>
+        <tr>
+          <td class="item">와셔액</td>
+          <td class="qty">4.5 L</td>
+          <td class="spec">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 엔진오일 섹션 -->
+<div class="section" style="max-width:1100px;margin:0 auto 16px;">
+  <div class="section-title"><span class="icon">🛢️</span> 엔진 오일 사양</div>
+
+  <!-- 앵커 링크 -->
+  <div class="eng-anchors">
+    <a href="#t22" class="eng-anchor">2.2 D <span>디젤</span></a>
+    <a href="#t20" class="eng-anchor">2.0 T <span>터보</span></a>
+    <a href="#t25" class="eng-anchor">2.5 T <span>터보</span></a>
+    <a href="#t33" class="eng-anchor">3.3 T <span>터보</span></a>
+  </div>
+</div>
+
+<!-- 2.2 디젤 -->
+<div class="section" id="t22">
+  <div class="eng-sec-title">
+    <span class="eng-disp">2.2 DIESEL</span>
+    <span class="eng-model">스팅어 2.2 디젤</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>항목</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td class="item">오일 규격</td><td>ACEA C3</td></tr>
+        <tr><td class="item">API 등급</td><td>SN / CF 이상</td></tr>
+        <tr><td class="item">점도 (기본 권장)</td><td class="cycle">SAE 5W-30</td></tr>
+        <tr><td class="item">용량 (필터 포함)</td><td class="qty">6.4 L</td></tr>
+        <tr><td class="item">비고</td><td class="warn">⚠ DPF 장착 차량 — 반드시 저회분(Low-SAPS) 규격 사용</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <a href="#top" class="back-top">↑ 맨 위로</a>
+</div>
+
+<!-- 2.0 터보 -->
+<div class="section" id="t20">
+  <div class="eng-sec-title">
+    <span class="eng-disp">2.0 TURBO</span>
+    <span class="eng-model">스팅어 2.0 터보</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>항목</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td class="item">API 등급</td><td>SN 이상</td></tr>
+        <tr><td class="item">ILSAC 등급</td><td>GF-5 이상</td></tr>
+        <tr><td class="item">점도 (기본 권장)</td><td class="cycle">SAE 5W-30</td></tr>
+        <tr><td class="item">용량 (필터 포함)</td><td class="qty">5.3 L</td></tr>
+        <tr><td class="item">비고</td><td class="note">💡 터보 엔진 특성상 고온 안정성이 좋은 합성유 권장</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <a href="#top" class="back-top">↑ 맨 위로</a>
+</div>
+
+<!-- 2.5 터보 -->
+<div class="section" id="t25">
+  <div class="eng-sec-title">
+    <span class="eng-disp">2.5 TURBO</span>
+    <span class="eng-model">스팅어 2.5 터보</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>항목</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td class="item">API 등급</td><td>SP 이상</td></tr>
+        <tr><td class="item">ILSAC 등급</td><td>GF-6 이상</td></tr>
+        <tr><td class="item">점도 (기본 권장)</td><td class="cycle">SAE 0W-30</td></tr>
+        <tr><td class="item">용량 (필터 포함)</td><td class="qty">6.0 L</td></tr>
+        <tr><td class="item">비고</td><td class="note">💡 연비·내구성 균형형 세팅 — 0W-30 점도 유지 권장</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <a href="#top" class="back-top">↑ 맨 위로</a>
+</div>
+
+<!-- 3.3 터보 -->
+<div class="section" id="t33">
+  <div class="eng-sec-title">
+    <span class="eng-disp">3.3 TURBO</span>
+    <span class="eng-model">스팅어 3.3 터보</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>항목</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td class="item">API 등급</td><td>SN 이상</td></tr>
+        <tr><td class="item">ILSAC 등급</td><td>GF-5 이상</td></tr>
+        <tr><td class="item">점도 (기본 권장)</td><td class="cycle">SAE 5W-30</td></tr>
+        <tr><td class="item">점도 (고성능 주행)</td><td>0W-40 / 5W-40 가능</td></tr>
+        <tr><td class="item">용량 (필터 포함)</td><td class="qty">6.8 L</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <a href="#top" class="back-top">↑ 맨 위로</a>
+</div>
+
+<div class="footer">STINGER MAINTENANCE GUIDE &nbsp;·&nbsp; 본 자료는 참고용이며 공식 정비 지침을 우선합니다</div>
+<div style="height:60vh;"></div>
+
+<script>
+(function () {
+  var sections = ['top', 'sec-cycle', 'sec-fluid', 't22', 't20', 't25', 't33'];
+  var navLinks = document.querySelectorAll('#sidenav a[data-target]');
+
+  function setActive(id) {
+    navLinks.forEach(function (a) {
+      var isActive = a.getAttribute('data-target') === id;
+      if (isActive) {
+        a.classList.add('active');
+      } else {
+        a.classList.remove('active');
+      }
+    });
+  }
+
+  function onScroll() {
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight;
+    var winHeight = window.innerHeight;
+    var atBottom = scrollY + winHeight >= docHeight - 10;
+
+    // 맨 아래에 도달하면 마지막 섹션 강제 활성화
+    if (atBottom) {
+      setActive(sections[sections.length - 1]);
+      return;
+    }
+
+    var current = sections[0];
+    for (var i = 0; i < sections.length; i++) {
+      var el = document.getElementById(sections[i]);
+      if (el && el.getBoundingClientRect().top <= 120) {
+        current = sections[i];
+      }
+    }
+    setActive(current);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>

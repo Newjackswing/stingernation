@@ -137,10 +137,16 @@
     }
     .sidenav a {
       flex: 1;
-      padding: 10px 4px 12px;
+      padding: 12px 4px 14px;
       margin: 0;
       border-radius: 0;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      min-width: 0;
+    }
+    .sidenav a .nav-sub {
       font-size: 11px;
+      margin-top: 3px;
     }
     .sidenav a.active::before {
       left: 50%;
@@ -153,7 +159,7 @@
       display: none;
     }
     body {
-      padding-bottom: 80px;
+      padding-bottom: 90px;
     }
   }
 
@@ -555,7 +561,11 @@
       <circle cx="12" cy="12" r="4.3" fill="none" stroke="white" stroke-width="1.8"/>
       <circle cx="17.3" cy="6.7" r="1.1" fill="white"/>
     </svg>
-    <span class="nav-sub">인스타</span>
+    <span class="nav-sub">인스타그램</span>
+  </a>
+  <a href="#sec-firmware" data-target="sec-firmware">
+    ⚙
+    <span class="nav-sub">DAG펌웨어</span>
   </a>
 </nav>
 
@@ -849,6 +859,20 @@
     <div class="insta-text">
       <div class="insta-handle">@stinger__nation</div>
       <div class="insta-sub">instagram.com/stinger__nation</div>
+    </div>
+    <div class="insta-arrow">→</div>
+  </a>
+</div>
+
+<div class="section" id="sec-firmware">
+  <div class="section-title"><span class="icon">⚙</span> DAG 펌웨어</div>
+  <a href="https://github.com/Newjackswing/stingernation/blob/cde08c2795d57ad39eaece8455ae0e3cf6491969/HKG2G_c18-7g2.7z" target="_blank" class="insta-link">
+    <div class="insta-icon">
+      
+    </div>
+    <div class="insta-text">
+      <div class="insta-handle">DAG 펌웨어 다운로드 페이지 링크</div>
+      <div class="insta-sub">페이지 우측 상단 ... 버튼 클릭 후 Download를 누르시면 됩니다.</div>
     </div>
     <div class="insta-arrow">→</div>
   </a>

@@ -228,62 +228,78 @@ function renderSideNav(data) {
   let activeId = null;
   let ticking = false;
 
-  function setActive(id, autoScrollNav = true) {
-    if (!id || id === activeId) return;
+  // 하나의 active 상태만 관리한다.
+  function setActive(id, moveNav = true) {
+    if (!id) return;
 
-    activeId = id;
-
-    // 반드시 하나만 활성화
     links.forEach(link => link.classList.remove('active'));
 
     const activeLink = links.find(link => link.dataset.target === id);
     if (!activeLink) return;
 
+    activeId = id;
     activeLink.classList.add('active');
 
-    // 모바일에서 활성 메뉴가 네비게이션 영역 밖으로 나간 경우에만 가로 이동
-    if (autoScrollNav && window.innerWidth <= 900) {
+    // 모바일에서 활성 메뉴가 네비게이션 화면 밖으로 나간 경우에만
+    // nav 자체를 가로 스크롤한다. 페이지 스크롤은 건드리지 않는다.
+    if (moveNav && window.innerWidth <= 900) {
       const navRect = nav.getBoundingClientRect();
       const linkRect = activeLink.getBoundingClientRect();
 
-      if (
-        linkRect.left < navRect.left + 6 ||
-        linkRect.right > navRect.right - 40
-      ) {
-        activeLink.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
+      if (linkRect.left < navRect.left + 8) {
+        nav.scrollBy({
+          left: linkRect.left - navRect.left - 16,
+          behavior: 'smooth'
+        });
+      } else if (linkRect.right > navRect.right - 8) {
+        nav.scrollBy({
+          left: linkRect.right - navRect.right + 16,
+          behavior: 'smooth'
         });
       }
     }
   }
 
-  function onScroll() {
-    const mobileOffset = window.innerWidth <= 900 ? nav.getBoundingClientRect().bottom + 12 : 120;
+  function getCurrentSection() {
+    if (!sections.length) return null;
 
-    // 네비게이션 기준선을 지나간 섹션 중 가장 마지막 섹션 하나만 선택
-    let current = sections[0]?.id;
+    const navBottom = window.innerWidth <= 900
+      ? nav.getBoundingClientRect().bottom + 14
+      : 120;
+
+    // 기준선을 통과한 섹션 중 가장 마지막 하나만 선택.
+    // 따라서 경계가 겹쳐도 active는 절대로 2개가 되지 않는다.
+    let current = sections[0];
 
     for (const item of sections) {
-      if (item.element.getBoundingClientRect().top <= mobileOffset) {
-        current = item.id;
+      if (item.element.getBoundingClientRect().top <= navBottom) {
+        current = item;
       } else {
         break;
       }
     }
 
-    // 페이지 최하단에서는 마지막 메뉴 선택
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
-      current = sections[sections.length - 1]?.id;
+    if (
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 4
+    ) {
+      current = sections[sections.length - 1];
     }
 
-    setActive(current, true);
+    return current;
   }
 
+  function updateActiveByScroll() {
+    const current = getCurrentSection();
+    if (current) {
+      setActive(current.id, current.id !== activeId);
+    }
+  }
+
+  // 클릭과 스크롤 모두 동일한 active 상태를 사용한다.
   links.forEach(link => {
     link.addEventListener('click', () => {
-      setActive(link.dataset.target, false);
+      setActive(link.dataset.target, true);
     });
   });
 
@@ -292,14 +308,16 @@ function renderSideNav(data) {
 
     ticking = true;
     window.requestAnimationFrame(() => {
-      onScroll();
+      updateActiveByScroll();
       ticking = false;
     });
   }, { passive: true });
 
-  window.addEventListener('resize', onScroll);
-  onScroll();
+  window.addEventListener('resize', updateActiveByScroll);
+
+  updateActiveByScroll();
 }
+
 async function init() {
   try {
     const [site, notice, vehicles, maintenance, fluids, links] = await Promise.all([

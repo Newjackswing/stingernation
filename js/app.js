@@ -261,3 +261,79 @@ async function init() {
 }
 
 init();
+
+
+(function () {
+  var nav = document.querySelector('#sidenav');
+  var navLinks = document.querySelectorAll('#sidenav a[data-target]');
+
+  /*
+   * Mobile nav:
+   * - exactly one section is active at a time
+   * - when the active section changes while scrolling, horizontally
+   *   scroll the nav so the active item is visible
+   */
+  function setActive(id) {
+    navLinks.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('data-target') === id);
+    });
+
+    if (nav && window.innerWidth <= 900) {
+      var active = document.querySelector('#sidenav a[data-target="' + id + '"]');
+      if (active) {
+        active.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }
+    }
+  }
+
+  function onScroll() {
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    var current = 'top';
+    var bestDistance = Infinity;
+
+    navLinks.forEach(function (a) {
+      var id = a.getAttribute('data-target');
+      var el = document.getElementById(id);
+      if (!el) return;
+
+      var distance = Math.abs(el.getBoundingClientRect().top - 110);
+
+      if (el.getBoundingClientRect().top <= 120 && distance < bestDistance) {
+        bestDistance = distance;
+        current = id;
+      }
+    });
+
+    /* At the very top, select the first/top section only. */
+    if (scrollY < 80) {
+      current = 'top';
+    }
+
+    setActive(current);
+  }
+
+  navLinks.forEach(function (a) {
+    a.addEventListener('click', function () {
+      var id = a.getAttribute('data-target');
+      setActive(id);
+    });
+  });
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', onScroll);
+  onScroll();
+})();

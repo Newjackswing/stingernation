@@ -738,3 +738,29 @@ img, svg {
     padding-top: 68px;
   }
 }
+
+
+/* =========================================================
+   Final mobile navigation refinement
+   ========================================================= */
+@media (max-width: 900px) {
+  .sidenav {
+    top: 18px !important;
+  }
+
+  /* Only one active navigation item is visually selected. */
+  .sidenav a.active {
+    background: var(--accent, #FF8C00) !important;
+    color: #fff !important;
+  }
+
+  .sidenav a.active ~ a {
+    /* no-op: active state is controlled by JS */
+  }
+}
+
+@media (max-width: 520px) {
+  .sidenav {
+    top: 20px !important;
+  }
+}

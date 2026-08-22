@@ -615,3 +615,70 @@ img, svg {
   height: 32px;
   flex: 0 0 32px;
 }
+
+
+/* =========================================================
+   Notice rules: paragraph/list wrapping without row separators
+   ========================================================= */
+
+.notice-rules {
+  display: block !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.notice-rules li,
+.notice-rules li + li,
+.notice-rules li.warn-rule {
+  display: grid !important;
+  grid-template-columns: 32px minmax(0, 1fr) !important;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* No line/border per item */
+  border: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+
+  /* Long text must wrap naturally */
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+
+  margin: 0 !important;
+  padding: 8px 0 !important;
+  background: transparent !important;
+}
+
+/* The number belongs to the item, not each visual line. */
+.notice-rules li > .rnum {
+  display: block;
+  align-self: start;
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Text stays in the second grid column, so wrapped lines
+   continue underneath the text instead of underneath the number. */
+.notice-rules li > span:last-child {
+  display: block;
+  min-width: 0;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+  line-height: 1.6;
+}
+
+@media (max-width: 520px) {
+  .notice-rules li,
+  .notice-rules li + li,
+  .notice-rules li.warn-rule {
+    grid-template-columns: 28px minmax(0, 1fr) !important;
+    gap: 7px;
+    padding: 7px 0 !important;
+  }
+}

@@ -522,3 +522,96 @@ img, svg {
     font-size: 25px;
   }
 }
+
+
+/* =========================================================
+   Mobile navigation position + horizontal-scroll indicator
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .sidenav {
+    top: 10px;
+    margin-bottom: 10px;
+    padding-right: 48px;
+    position: sticky;
+    box-shadow: 0 3px 14px rgba(0,0,0,.08);
+  }
+
+  .sidenav::after {
+    content: "↔";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,.94);
+    border: 1px solid rgba(0,0,0,.12);
+    box-shadow: 0 2px 8px rgba(0,0,0,.10);
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--accent, #FF8C00);
+    pointer-events: none;
+  }
+
+  .sidenav.scroll-hint-hidden::after {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .sidenav {
+    top: 12px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+}
+
+
+/* =========================================================
+   Notice rules: clean list, no per-line boxes
+   ========================================================= */
+
+.notice-rules {
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.notice-rules li {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 10px 0 !important;
+}
+
+.notice-rules li + li {
+  border-top: 1px solid var(--border, #D4D4D8) !important;
+}
+
+.notice-rules li.warn-rule {
+  background: transparent !important;
+  border-left: 0 !important;
+}
+
+.notice-rules .rnum {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-weight: 800;
+}
+
+
+.instagram-icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}

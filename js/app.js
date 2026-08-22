@@ -261,3 +261,18 @@ async function init() {
 }
 
 init();
+
+
+/* Hide the mobile horizontal-scroll hint after first interaction. */
+document.addEventListener('DOMContentLoaded', function () {
+  const nav = document.querySelector('.sidenav');
+  if (!nav) return;
+
+  const hideHint = function () {
+    nav.classList.add('scroll-hint-hidden');
+  };
+
+  nav.addEventListener('touchstart', hideHint, { passive: true });
+  nav.addEventListener('wheel', hideHint, { passive: true });
+  nav.addEventListener('scroll', hideHint, { passive: true });
+});

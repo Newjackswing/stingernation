@@ -327,13 +327,135 @@ init();
   window.addEventListener('scroll', function () {
     if (!ticking) {
       window.requestAnimationFrame(function () {
-        onScroll();
-        ticking = false;
-      });
-      ticking = true;
+  const nav = document.querySelector('#sidenav');
+  const links = Array.from(document.querySelectorAll('#sidenav a[data-target]'));
+
+  if (!nav || !links.length) return;
+
+  const sections = links
+    .map(link => {
+      const id = link.getAttribute('data-target');
+      return {
+        id,
+        el: document.getElementById(id),
+        link
+      };
+    })
+    .filter(item => item.el);
+
+  let activeId = null;
+  let ticking = false;
+
+  function activate(id, moveNav = true) {
+    if (!id || id === activeId) return;
+
+    activeId = id;
+
+    /* Remove active from EVERY link first. */
+    links.forEach(link => link.classList.remove('active'));
+
+    const activeLink = links.find(link =>
+      link.getAttribute('data-target') === id
+    );
+
+    if (!activeLink) return;
+
+    /* Then add it to exactly ONE link. */
+    activeLink.classList.add('active');
+
+    /*
+     * Keep the selected navigation item visible.
+     * Do this only when the active section actually changes.
+     */
+    if (
+      moveNav &&
+      window.innerWidth <= 900
+    ) {
+      const navRect = nav.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+
+      const outsideLeft = linkRect.left < navRect.left + 8;
+      const outsideRight = linkRect.right > navRect.right - 8;
+
+      if (outsideLeft || outsideRight) {
+        activeLink.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }
     }
+  }
+
+  /*
+   * Determine the current section from its position relative to
+   * the fixed mobile navigation.
+   *
+   * Only ONE section can win because the minimum distance is selected.
+   */
+  function updateActive() {
+    const navBottom =
+      window.innerWidth <= 900
+        ? nav.getBoundingClientRect().bottom + 16
+        : 100;
+
+    let best = null;
+    let bestDistance = Infinity;
+
+    sections.forEach(item => {
+      const rect = item.el.getBoundingClientRect();
+
+      /*
+       * Prefer sections whose top has passed the navigation.
+       * Among them, choose the closest one.
+       */
+      if (rect.top <= navBottom) {
+        const distance = Math.abs(navBottom - rect.top);
+
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          best = item;
+        }
+      }
+    });
+
+    /*
+     * At the very top, use the first navigation item.
+     */
+    if (!best && sections.length) {
+      best = sections[0];
+    }
+
+    if (best) {
+      activate(best.id, true);
+    }
+  }
+
+  /* Navigation click: immediately make exactly one active. */
+  links.forEach(link => {
+    link.addEventListener('click', function () {
+      const id = this.getAttribute('data-target');
+      activate(id, false);
+    });
+  });
+
+  /*
+   * Scroll observer:
+   * update after scrolling settles enough to avoid rapid double selection.
+   */
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+
+    ticking = true;
+
+    window.requestAnimationFrame(function () {
+      updateActive();
+      ticking = false;
+    });
   }, { passive: true });
 
-  window.addEventListener('resize', onScroll);
-  onScroll();
+  window.addEventListener('resize', updateActive);
+
+  /* Initial state. */
+  updateActive();
 })();

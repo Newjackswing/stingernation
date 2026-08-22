@@ -764,3 +764,19 @@ img, svg {
     top: 20px !important;
   }
 }
+
+
+/* =========================================================
+   Mobile navigation refinement - safe override
+   ========================================================= */
+@media (max-width: 900px) {
+  .sidenav {
+    top: 22px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .sidenav {
+    top: 24px !important;
+  }
+}

@@ -209,27 +209,97 @@ function renderSideNav(data) {
     ['sec-firmware', '⚙', 'DAG펌웨어']
   ];
 
-  document.querySelector('#sidenav').innerHTML = items.map(([id, label, sub], i) => `
+  const nav = document.querySelector('#sidenav');
+
+  nav.innerHTML = items.map(([id, label, sub], i) => `
     ${i === 1 || i === data.vehicles.length + 2 ? '<div class="nav-divider"></div>' : ''}
     <a href="#${escapeHtml(id)}" data-target="${escapeHtml(id)}">${escapeHtml(label)}<span class="nav-sub">${escapeHtml(sub)}</span></a>
   `).join('');
 
-  const links = document.querySelectorAll('#sidenav a[data-target]');
-  const sections = [...links].map(a => a.dataset.target);
-  function setActive(id) {
-    links.forEach(a => a.classList.toggle('active', a.dataset.target === id));
+  const links = [...nav.querySelectorAll('a[data-target]')];
+  const sections = links
+    .map(link => ({
+      id: link.dataset.target,
+      link,
+      element: document.getElementById(link.dataset.target)
+    }))
+    .filter(item => item.element);
+
+  let activeId = null;
+  let ticking = false;
+
+  function setActive(id, autoScrollNav = true) {
+    if (!id || id === activeId) return;
+
+    activeId = id;
+
+    // 반드시 하나만 활성화
+    links.forEach(link => link.classList.remove('active'));
+
+    const activeLink = links.find(link => link.dataset.target === id);
+    if (!activeLink) return;
+
+    activeLink.classList.add('active');
+
+    // 모바일에서 활성 메뉴가 네비게이션 영역 밖으로 나간 경우에만 가로 이동
+    if (autoScrollNav && window.innerWidth <= 900) {
+      const navRect = nav.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+
+      if (
+        linkRect.left < navRect.left + 6 ||
+        linkRect.right > navRect.right - 40
+      ) {
+        activeLink.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }
+    }
   }
+
   function onScroll() {
-    let current = sections[0];
-    const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 10;
-    if (atBottom) current = sections[sections.length - 1];
-    else sections.forEach(id => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 120) current = id; });
-    setActive(current);
+    const mobileOffset = window.innerWidth <= 900 ? nav.getBoundingClientRect().bottom + 12 : 120;
+
+    // 네비게이션 기준선을 지나간 섹션 중 가장 마지막 섹션 하나만 선택
+    let current = sections[0]?.id;
+
+    for (const item of sections) {
+      if (item.element.getBoundingClientRect().top <= mobileOffset) {
+        current = item.id;
+      } else {
+        break;
+      }
+    }
+
+    // 페이지 최하단에서는 마지막 메뉴 선택
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+      current = sections[sections.length - 1]?.id;
+    }
+
+    setActive(current, true);
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      setActive(link.dataset.target, false);
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      onScroll();
+      ticking = false;
+    });
+  }, { passive: true });
+
+  window.addEventListener('resize', onScroll);
   onScroll();
 }
-
 async function init() {
   try {
     const [site, notice, vehicles, maintenance, fluids, links] = await Promise.all([
@@ -261,79 +331,3 @@ async function init() {
 }
 
 init();
-
-
-(function () {
-  var nav = document.querySelector('#sidenav');
-  var navLinks = document.querySelectorAll('#sidenav a[data-target]');
-
-  /*
-   * Mobile nav:
-   * - exactly one section is active at a time
-   * - when the active section changes while scrolling, horizontally
-   *   scroll the nav so the active item is visible
-   */
-  function setActive(id) {
-    navLinks.forEach(function (a) {
-      a.classList.toggle('active', a.getAttribute('data-target') === id);
-    });
-
-    if (nav && window.innerWidth <= 900) {
-      var active = document.querySelector('#sidenav a[data-target="' + id + '"]');
-      if (active) {
-        active.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
-        });
-      }
-    }
-  }
-
-  function onScroll() {
-    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    var current = 'top';
-    var bestDistance = Infinity;
-
-    navLinks.forEach(function (a) {
-      var id = a.getAttribute('data-target');
-      var el = document.getElementById(id);
-      if (!el) return;
-
-      var distance = Math.abs(el.getBoundingClientRect().top - 110);
-
-      if (el.getBoundingClientRect().top <= 120 && distance < bestDistance) {
-        bestDistance = distance;
-        current = id;
-      }
-    });
-
-    /* At the very top, select the first/top section only. */
-    if (scrollY < 80) {
-      current = 'top';
-    }
-
-    setActive(current);
-  }
-
-  navLinks.forEach(function (a) {
-    a.addEventListener('click', function () {
-      var id = a.getAttribute('data-target');
-      setActive(id);
-    });
-  });
-
-  var ticking = false;
-  window.addEventListener('scroll', function () {
-    if (!ticking) {
-      window.requestAnimationFrame(function () {
-        onScroll();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-
-  window.addEventListener('resize', onScroll);
-  onScroll();
-})();

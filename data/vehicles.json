@@ -1,0 +1,166 @@
+{
+  "vehicles": [
+    {
+      "id": "t20",
+      "name": "2.0 TURBO",
+      "model": "스팅어 2.0 터보",
+      "specs": [
+        {
+          "label": "API 등급",
+          "value": "SN 이상",
+          "type": "normal"
+        },
+        {
+          "label": "ILSAC 등급",
+          "value": "GF-5 이상",
+          "type": "normal"
+        },
+        {
+          "label": "점도 (기본 권장)",
+          "value": "SAE 5W-30",
+          "type": "cycle"
+        },
+        {
+          "label": "용량 (필터 포함)",
+          "value": "5.3 L",
+          "type": "qty"
+        },
+        {
+          "label": "비고",
+          "value": "💡 터보 엔진 특성상 고온 안정성이 좋은 합성유 권장",
+          "type": "note"
+        }
+      ]
+    },
+    {
+      "id": "t25",
+      "name": "2.5 TURBO",
+      "model": "스팅어 2.5 터보",
+      "specs": [
+        {
+          "label": "API 등급",
+          "value": "SP 이상",
+          "type": "normal"
+        },
+        {
+          "label": "ILSAC 등급",
+          "value": "GF-6 이상",
+          "type": "normal"
+        },
+        {
+          "label": "점도 (기본 권장)",
+          "value": "SAE 0W-30",
+          "type": "cycle"
+        },
+        {
+          "label": "용량 (필터 포함)",
+          "value": "6.0 L",
+          "type": "qty"
+        },
+        {
+          "label": "비고",
+          "value": "💡 연비·내구성 균형형 세팅 — 0W-30 점도 유지 권장",
+          "type": "note"
+        }
+      ]
+    },
+    {
+      "id": "t33",
+      "name": "3.3 TURBO",
+      "model": "스팅어 3.3 터보",
+      "specs": [
+        {
+          "label": "API 등급",
+          "value": "SN 이상",
+          "type": "normal"
+        },
+        {
+          "label": "ILSAC 등급",
+          "value": "GF-5 이상",
+          "type": "normal"
+        },
+        {
+          "label": "점도 (기본 권장)",
+          "value": "SAE 5W-30",
+          "type": "cycle"
+        },
+        {
+          "label": "점도 (고성능 주행)",
+          "value": "0W-40 / 5W-40 가능",
+          "type": "normal"
+        },
+        {
+          "label": "용량 (필터 포함)",
+          "value": "6.8 L",
+          "type": "qty"
+        }
+      ]
+    },
+    {
+      "id": "t22",
+      "name": "2.2 DIESEL",
+      "model": "스팅어 2.2 디젤",
+      "specs": [
+        {
+          "label": "오일 규격",
+          "value": "ACEA C3",
+          "type": "normal"
+        },
+        {
+          "label": "API 등급",
+          "value": "SN / CF 이상",
+          "type": "normal"
+        },
+        {
+          "label": "점도 (기본 권장)",
+          "value": "SAE 5W-30",
+          "type": "cycle"
+        },
+        {
+          "label": "용량 (필터 포함)",
+          "value": "6.4 L",
+          "type": "qty"
+        },
+        {
+          "label": "비고",
+          "value": "⚠ DPF 장착 차량 — 반드시 저회분(Low-SAPS) 규격 사용",
+          "type": "warn"
+        }
+      ]
+    },
+    {
+      "id": "bmwx7",
+      "name": "BMW X7",
+      "model": "BMW X7",
+      "specs": [
+        {
+          "label": "엔진오일",
+          "value": "모빌원 골드 0W-40",
+          "type": "cycle"
+        },
+        {
+          "label": "점도",
+          "value": "SAE 0W-40",
+          "type": "cycle"
+        },
+        {
+          "label": "용량",
+          "value": "6.0 L",
+          "type": "qty"
+        }
+      ],
+      "additionalSpecs": [
+        {
+          "label": "타이어 사이즈 (앞)",
+          "value": "275/40 R22",
+          "type": "spec"
+        },
+        {
+          "label": "타이어 사이즈 (뒤)",
+          "value": "315/35 R22",
+          "type": "spec"
+        }
+      ]
+    }
+  ]
+}

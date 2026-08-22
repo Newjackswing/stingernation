@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": "instagram",
+      "title": "공식 인스타그램",
+      "label": "@stinger__nation",
+      "url": "https://www.instagram.com/stinger__nation",
+      "description": "STINGERNATION 공식 인스타그램",
+      "icon": "instagram"
+    },
+    {
+      "id": "firmware",
+      "title": "DAG 펌웨어",
+      "label": "DAG 펌웨어 다운로드 페이지 링크",
+      "url": "https://raw.githubusercontent.com/Newjackswing/stingernation/refs/heads/main/HKG2G_c18-7g3.zip",
+      "description": "버전은 2026년 8월 현대/기아 G2 버전입니다. 최신버전을 원할 시 DAG 카페 이용.",
+      "icon": "gear"
+    }
+  ]
+}

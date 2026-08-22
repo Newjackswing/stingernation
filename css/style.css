@@ -682,3 +682,59 @@ img, svg {
     padding: 7px 0 !important;
   }
 }
+
+
+/* =========================================================
+   Final mobile navigation: always visible
+   ========================================================= */
+@media (max-width: 900px) {
+  .sidenav {
+    position: fixed !important;
+    top: 10px !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000;
+
+    width: 100%;
+    margin: 0 !important;
+    padding: 8px 48px 8px 10px;
+    box-sizing: border-box;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    background: var(--surface, #fff);
+    box-shadow: 0 3px 14px rgba(0,0,0,.08);
+  }
+
+  body {
+    padding-top: 64px;
+  }
+
+  html {
+    scroll-padding-top: 78px;
+  }
+
+  .section,
+  .notice-section {
+    scroll-margin-top: 78px;
+  }
+
+  /* Keep the horizontal-scroll indicator visible. */
+  .sidenav.scroll-hint-hidden::after {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .sidenav {
+    top: 12px !important;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+
+  body {
+    padding-top: 68px;
+  }
+}

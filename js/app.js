@@ -22,6 +22,14 @@ function escapeHtml(value = '') {
     .replaceAll("'", '&#039;');
 }
 
+const INSTAGRAM_SVG = `
+  <svg class="ig-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3" y="3" width="18" height="18" rx="5.5"></rect>
+    <circle cx="12" cy="12" r="4.2"></circle>
+    <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"></circle>
+  </svg>
+`;
+
 function specClass(type) {
   return ['cycle', 'qty', 'spec', 'warn', 'note'].includes(type) ? type : '';
 }
@@ -203,10 +211,10 @@ function renderLinks(data) {
   const container = document.querySelector('#links');
   container.innerHTML = data.items.map(item => `
     <section class="section" id="sec-${escapeHtml(item.id)}">
-      <div class="section-title"><span class="icon">${item.icon === 'instagram' ? '📸' : '⚙'}</span> ${escapeHtml(item.title)}</div>
+      <div class="section-title">${item.icon === 'instagram' ? `<span class="icon icon-ig">${INSTAGRAM_SVG}</span>` : '<span class="icon">⚙</span>'} ${escapeHtml(item.title)}</div>
       <div class="link-list">
         <a class="external-link" href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">
-          <div class="link-icon">${item.icon === 'instagram' ? '◎' : '⚙'}</div>
+          <div class="link-icon${item.icon === 'instagram' ? ' ig' : ''}">${item.icon === 'instagram' ? INSTAGRAM_SVG : '⚙'}</div>
           <div>
             <div class="link-title">${escapeHtml(item.label)}</div>
             <div class="link-sub">${escapeHtml(item.description)}</div>
@@ -237,7 +245,7 @@ function renderSideNav(data) {
 
   nav.innerHTML = items.map(([id, label, sub], i) => `
     ${i === 1 || i === data.vehicles.length + 2 ? '<div class="nav-divider"></div>' : ''}
-    <a href="#${escapeHtml(id)}" data-target="${escapeHtml(id)}">${escapeHtml(label)}<span class="nav-sub">${escapeHtml(sub)}</span></a>
+    <a href="#${escapeHtml(id)}" data-target="${escapeHtml(id)}">${id === 'sec-instagram' ? `<span class="nav-ig">${INSTAGRAM_SVG}</span>` : escapeHtml(label)}<span class="nav-sub">${escapeHtml(sub)}</span></a>
   `).join('');
 
   const links = [...nav.querySelectorAll('a[data-target]')];

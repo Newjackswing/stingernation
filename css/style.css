@@ -950,3 +950,21 @@ td.item { color: #3f3f46; }
   .tire-table td.spec { white-space: normal; }
   .same-note { display: block; margin: 2px 0 0; }
 }
+
+/* ===== Instagram icon ===== */
+.ig-glyph { display: block; width: 100%; height: 100%; }
+.icon-ig {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 4px;
+  border-radius: 8px;
+  color: #fff;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+.link-icon.ig {
+  padding: 9px;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+.nav-ig { display: block; width: 18px; height: 18px; margin: 0 auto; }

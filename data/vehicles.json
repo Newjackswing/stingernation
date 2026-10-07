@@ -30,6 +30,23 @@
           "value": "💡 터보 엔진 특성상 고온 안정성이 좋은 합성유 권장",
           "type": "note"
         }
+      ],
+      "additionalSpecs": [
+        {
+          "label": "타이어 사이즈 (18인치)",
+          "value": "225/45 R18",
+          "type": "spec"
+        },
+        {
+          "label": "타이어 사이즈 (19인치 앞)",
+          "value": "225/40 ZR19",
+          "type": "spec"
+        },
+        {
+          "label": "타이어 사이즈 (19인치 뒤)",
+          "value": "255/35 ZR19",
+          "type": "spec"
+        }
       ]
     },
     {
@@ -61,6 +78,33 @@
           "label": "비고",
           "value": "💡 연비·내구성 균형형 세팅 — 0W-30 점도 유지 권장",
           "type": "note"
+        }
+      ],
+      "additionalSpecs": [
+        {
+          "label": "타이어 사이즈 (18인치)",
+          "value": "225/45 R18",
+          "type": "spec"
+        },
+        {
+          "label": "타이어 사이즈 (19인치 앞)",
+          "value": "225/40 ZR19",
+          "type": "spec"
+        },
+        {
+          "label": "타이어 사이즈 (19인치 뒤)",
+          "value": "255/35 ZR19",
+          "type": "spec"
+        },
+        {
+          "label": "타이어 사이즈 (20인치 앞)",
+          "value": "225/35 ZR20",
+          "type": "spec"
+        },
+        {
+          "label": "타이어 사이즈 (20인치 뒤)",
+          "value": "255/30 ZR20",
+          "type": "spec"
         }
       ]
     },
@@ -94,6 +138,33 @@
           "value": "6.8 L",
           "type": "qty"
         }
+      ],
+      "additionalSpecs": [
+        {
+          "label": "타이어 사이즈 (18인치)",
+          "value": "225/45 R18",
+          "type": "spec"
+        },
+        {
+          "label": "타이어 사이즈 (19인치 앞)",
+          "value": "225/40 ZR19",
+          "type": "spec"
+        },
+        {
+          "label": "타이어 사이즈 (19인치 뒤)",
+          "value": "255/35 ZR19",
+          "type": "spec"
+        },
+        {
+          "label": "타이어 사이즈 (20인치 앞)",
+          "value": "225/35 ZR20",
+          "type": "spec"
+        },
+        {
+          "label": "타이어 사이즈 (20인치 뒤)",
+          "value": "255/30 ZR20",
+          "type": "spec"
+        }
       ]
     },
     {
@@ -125,6 +196,13 @@
           "label": "비고",
           "value": "⚠ DPF 장착 차량 — 반드시 저회분(Low-SAPS) 규격 사용",
           "type": "warn"
+        }
+      ],
+      "additionalSpecs": [
+        {
+          "label": "타이어 사이즈 (18인치)",
+          "value": "225/45 R18",
+          "type": "spec"
         }
       ]
     },

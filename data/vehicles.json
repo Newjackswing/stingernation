@@ -31,21 +31,16 @@
           "type": "note"
         }
       ],
-      "additionalSpecs": [
+      "tires": [
         {
-          "label": "타이어 사이즈 (18인치)",
-          "value": "225/45 R18",
-          "type": "spec"
+          "wheel": "18인치",
+          "front": "225/45 R18",
+          "rear": "225/45 R18"
         },
         {
-          "label": "타이어 사이즈 (19인치 앞)",
-          "value": "225/40 ZR19",
-          "type": "spec"
-        },
-        {
-          "label": "타이어 사이즈 (19인치 뒤)",
-          "value": "255/35 ZR19",
-          "type": "spec"
+          "wheel": "19인치",
+          "front": "225/40 ZR19",
+          "rear": "255/35 ZR19"
         }
       ]
     },
@@ -80,31 +75,21 @@
           "type": "note"
         }
       ],
-      "additionalSpecs": [
+      "tires": [
         {
-          "label": "타이어 사이즈 (18인치)",
-          "value": "225/45 R18",
-          "type": "spec"
+          "wheel": "18인치",
+          "front": "225/45 R18",
+          "rear": "225/45 R18"
         },
         {
-          "label": "타이어 사이즈 (19인치 앞)",
-          "value": "225/40 ZR19",
-          "type": "spec"
+          "wheel": "19인치",
+          "front": "225/40 ZR19",
+          "rear": "255/35 ZR19"
         },
         {
-          "label": "타이어 사이즈 (19인치 뒤)",
-          "value": "255/35 ZR19",
-          "type": "spec"
-        },
-        {
-          "label": "타이어 사이즈 (20인치 앞)",
-          "value": "225/35 ZR20",
-          "type": "spec"
-        },
-        {
-          "label": "타이어 사이즈 (20인치 뒤)",
-          "value": "255/30 ZR20",
-          "type": "spec"
+          "wheel": "20인치",
+          "front": "225/35 ZR20",
+          "rear": "255/30 ZR20"
         }
       ]
     },
@@ -139,31 +124,21 @@
           "type": "qty"
         }
       ],
-      "additionalSpecs": [
+      "tires": [
         {
-          "label": "타이어 사이즈 (18인치)",
-          "value": "225/45 R18",
-          "type": "spec"
+          "wheel": "18인치",
+          "front": "225/45 R18",
+          "rear": "225/45 R18"
         },
         {
-          "label": "타이어 사이즈 (19인치 앞)",
-          "value": "225/40 ZR19",
-          "type": "spec"
+          "wheel": "19인치",
+          "front": "225/40 ZR19",
+          "rear": "255/35 ZR19"
         },
         {
-          "label": "타이어 사이즈 (19인치 뒤)",
-          "value": "255/35 ZR19",
-          "type": "spec"
-        },
-        {
-          "label": "타이어 사이즈 (20인치 앞)",
-          "value": "225/35 ZR20",
-          "type": "spec"
-        },
-        {
-          "label": "타이어 사이즈 (20인치 뒤)",
-          "value": "255/30 ZR20",
-          "type": "spec"
+          "wheel": "20인치",
+          "front": "225/35 ZR20",
+          "rear": "255/30 ZR20"
         }
       ]
     },
@@ -198,11 +173,11 @@
           "type": "warn"
         }
       ],
-      "additionalSpecs": [
+      "tires": [
         {
-          "label": "타이어 사이즈 (18인치)",
-          "value": "225/45 R18",
-          "type": "spec"
+          "wheel": "18인치",
+          "front": "225/45 R18",
+          "rear": "225/45 R18"
         }
       ]
     },
@@ -227,16 +202,11 @@
           "type": "qty"
         }
       ],
-      "additionalSpecs": [
+      "tires": [
         {
-          "label": "타이어 사이즈 (앞)",
-          "value": "275/40 R22",
-          "type": "spec"
-        },
-        {
-          "label": "타이어 사이즈 (뒤)",
-          "value": "315/35 R22",
-          "type": "spec"
+          "wheel": "22인치",
+          "front": "275/40 R22",
+          "rear": "315/35 R22"
         }
       ]
     }

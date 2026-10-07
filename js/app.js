@@ -109,6 +109,29 @@ function renderVehicle(vehicle) {
     </div>
   ` : '';
 
+  const tires = vehicle.tires?.length ? `
+    <div class="table-wrap tire-wrap">
+      <div class="tire-title">🛞 타이어 사이즈</div>
+      <table class="tire-table">
+        <thead><tr><th>휠</th><th>앞</th><th>뒤</th></tr></thead>
+        <tbody>
+          ${vehicle.tires.map(t => t.front === t.rear ? `
+            <tr>
+              <td class="item">${escapeHtml(t.wheel)}</td>
+              <td class="spec same" colspan="2">${escapeHtml(t.front)}<span class="same-note">앞·뒤 동일</span></td>
+            </tr>
+          ` : `
+            <tr>
+              <td class="item">${escapeHtml(t.wheel)}</td>
+              <td class="spec">${escapeHtml(t.front)}</td>
+              <td class="spec">${escapeHtml(t.rear)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  ` : '';
+
   return `
     <section class="section vehicle-section" id="${escapeHtml(vehicle.id)}">
       <div class="eng-sec-title">
@@ -122,6 +145,7 @@ function renderVehicle(vehicle) {
         </table>
       </div>
       ${additional}
+      ${tires}
       <a href="#top" class="back-top">↑ 맨 위로</a>
     </section>
   `;

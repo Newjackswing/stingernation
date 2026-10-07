@@ -917,3 +917,36 @@ img, svg {
     top: 88px;
   }
 }
+
+
+/* ===== Readability pass ===== */
+tbody tr:nth-child(even) td { background: var(--surface-2); }
+td.item { color: #3f3f46; }
+
+.tire-wrap { padding-top: 4px; }
+.tire-title {
+  margin: 4px 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+.tire-table { min-width: 0; table-layout: fixed; }
+.tire-table th:first-child,
+.tire-table td:first-child { width: 28%; }
+.tire-table td.spec { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tire-table td.same { text-align: center; }
+.same-note {
+  margin-left: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+.tire-table th:nth-child(n+2) { text-align: center; }
+.tire-table td:nth-child(n+2) { text-align: center; }
+
+.eng-sec-title { background: var(--surface-2); }
+
+@media (max-width: 520px) {
+  .tire-table td.spec { white-space: normal; }
+  .same-note { display: block; margin: 2px 0 0; }
+}
